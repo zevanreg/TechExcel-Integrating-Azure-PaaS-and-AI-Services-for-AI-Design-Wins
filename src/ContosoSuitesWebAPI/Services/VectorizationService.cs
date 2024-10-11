@@ -33,6 +33,11 @@ namespace ContosoSuitesWebAPI.Services
         // Exercise 3 Task 3 TODO #2: Uncomment the following code block to execute a vector search query against Cosmos DB.
         public async Task<List<VectorSearchResult>> ExecuteVectorSearch(float[] queryVector, int max_results = 0, double minimum_similarity_score = 0.8)
         {
+            Console.WriteLine("!!!!");
+            Console.WriteLine(configuration.GetValue<string>("CosmosDB:ConnectionString"));
+            Console.WriteLine(configuration.GetValue<string>("CosmosDB:DatabaseName"));
+            Console.WriteLine(configuration.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName"));
+            
            var db = _cosmosClient.GetDatabase(configuration.GetValue<string>("CosmosDB:DatabaseName") ?? "ContosoSuites");
            var container = db.GetContainer(configuration.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName") ?? "MaintenanceRequests");
 
