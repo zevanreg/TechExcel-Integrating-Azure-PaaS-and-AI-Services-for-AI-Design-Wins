@@ -14,15 +14,15 @@ using Microsoft.SemanticKernel.ChatCompletion;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var config = new ConfigurationBuilder()
+builder.Configuration
     .AddUserSecrets<Program>()
     .AddEnvironmentVariables()
     .Build();
 
 Console.WriteLine("!!!!");
-Console.WriteLine(config.GetValue<string>("CosmosDB:ConnectionString") ?? "NO CONNECTION");
-Console.WriteLine(config.GetValue<string>("CosmosDB:DatabaseName") ?? "ContosoSuites");
-Console.WriteLine(config.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName") ?? "ContosoSuites");
+Console.WriteLine(builder.Configuration.GetValue<string>("CosmosDB:ConnectionString") ?? "NO CONNECTION");
+Console.WriteLine(builder.Configuration.GetValue<string>("CosmosDB:DatabaseName") ?? "ContosoSuites");
+Console.WriteLine(builder.Configuration.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName") ?? "ContosoSuites");
 
 
 // Add services to the container.
