@@ -34,12 +34,12 @@ namespace ContosoSuitesWebAPI.Services
         public async Task<List<VectorSearchResult>> ExecuteVectorSearch(float[] queryVector, int max_results = 0, double minimum_similarity_score = 0.8)
         {
             Console.WriteLine("!!!!");
-            Console.WriteLine(configuration.GetValue<string>("CosmosDB:ConnectionString"));
-            Console.WriteLine(configuration.GetValue<string>("CosmosDB:DatabaseName"));
-            Console.WriteLine(configuration.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName"));
+            Console.WriteLine(configuration.GetValue<string>("CosmosDB:ConnectionString") ?? "NO CONNECTION");
+            Console.WriteLine(configuration.GetValue<string>("CosmosDB:DatabaseName") ?? "ContosoSuites");
+            Console.WriteLine(configuration.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName") ?? "ContosoSuites");
             
            var db = _cosmosClient.GetDatabase(configuration.GetValue<string>("CosmosDB:DatabaseName") ?? "ContosoSuites");
-           var container = db.GetContainer(configuration.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName") ?? "MaintenanceRequests");
+           var container = db.GetContainer(configuration.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName") ?? "ContosoSuites");
 
            var query = $"SELECT c.hotel_id AS HotelId, c.hotel AS Hotel, c.details AS Details, c.source AS Source, VectorDistance(c.request_vector, [{string.Join(",", queryVector)}]) AS SimilarityScore FROM c";
            query += $" WHERE VectorDistance(c.request_vector, [{string.Join(",", queryVector)}]) > {minimum_similarity_score}";
