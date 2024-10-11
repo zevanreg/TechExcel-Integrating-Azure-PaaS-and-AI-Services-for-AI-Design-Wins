@@ -42,12 +42,12 @@ builder.Services.AddSingleton<Kernel>((_) =>
     #pragma warning disable SKEXP0010 
     kernelBuilder.AddAzureOpenAIChatCompletion(
         deploymentName: builder.Configuration["AzureOpenAI:DeploymentName"]!,
-        endpoint: builder.Configuration["AzureOpenAI:Endpoint"]!,
-        apiKey: builder.Configuration["AzureOpenAI:ApiKey"]!
+        endpoint: builder.Configuration["ApiManagement:Endpoint"]!,
+        apiKey: builder.Configuration["ApiManagement:ApiKey"]!
     ).AddAzureOpenAITextEmbeddingGeneration(
-        builder.Configuration["AzureOpenAI:EmbeddingDeploymentName"]!,
-        endpoint: builder.Configuration["AzureOpenAI:Endpoint"]!,
-        apiKey: builder.Configuration["AzureOpenAI:ApiKey"]!
+        deploymentName: builder.Configuration["AzureOpenAI:EmbeddingDeploymentName"]!,
+        endpoint: builder.Configuration["ApiManagement:Endpoint"]!,
+        apiKey: builder.Configuration["ApiManagement:ApiKey"]!
         );
     #pragma warning restore SKEXP0010 
     kernelBuilder.Plugins.AddFromType<DatabaseService>();
