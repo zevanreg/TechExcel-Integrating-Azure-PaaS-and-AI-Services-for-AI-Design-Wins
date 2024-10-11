@@ -19,12 +19,6 @@ builder.Configuration
     .AddEnvironmentVariables()
     .Build();
 
-Console.WriteLine("!!!!");
-Console.WriteLine(builder.Configuration.GetValue<string>("CosmosDB:ConnectionString") ?? "NO CONNECTION");
-Console.WriteLine(builder.Configuration.GetValue<string>("CosmosDB:DatabaseName") ?? "ContosoSuites");
-Console.WriteLine(builder.Configuration.GetValue<string>("CosmosDB:MaintenanceRequestsContainerName") ?? "ContosoSuites");
-
-
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
